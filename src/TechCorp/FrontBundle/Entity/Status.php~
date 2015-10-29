@@ -14,6 +14,12 @@ use TechCorp\FrontBundle\Entity\User;
  */
 class Status
 {
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
+
+
     /**
      * @var integer
      *
@@ -56,6 +62,11 @@ class Status
      * @ORM\joincolumn(name="user_id", referencedColumnName="id")
      */
     private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="status")
+     */
+    private $comments;
 
 
     /**
@@ -197,5 +208,39 @@ class Status
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \TechCorp\FrontBundle\Entity\Comment $comment
+     *
+     * @return Status
+     */
+    public function addComment(\TechCorp\FrontBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \TechCorp\FrontBundle\Entity\Comment $comment
+     */
+    public function removeComment(\TechCorp\FrontBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

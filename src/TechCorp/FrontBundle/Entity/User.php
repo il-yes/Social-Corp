@@ -21,6 +21,7 @@ class User
         $this->statuses = new ArrayCollection();
         $this->friends = new ArrayCollection();
         $this->friendsWithMe = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
 
@@ -68,6 +69,11 @@ class User
      */
     private $friendsWithMe;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="user")
+     */
+    private $comments;
 
     /**
      * Get id
@@ -234,4 +240,38 @@ class User
         return $this!=$friend && !$this->hasFriend($friend);
     }
 
+
+    /**
+     * Add comment
+     *
+     * @param \TechCorp\FrontBundle\Entity\Comment $comment
+     *
+     * @return User
+     */
+    public function addComment(\TechCorp\FrontBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \TechCorp\FrontBundle\Entity\Comment $comment
+     */
+    public function removeComment(\TechCorp\FrontBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
 }
