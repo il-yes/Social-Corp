@@ -7,6 +7,7 @@
 			<table class="statuses_list">
 				<thead>
 					<tr>
+						<th>User</th>
 						<th>Content</th>
 						<th>deleted</th>
 						<th>Created at</th>
@@ -15,6 +16,7 @@
 				<tbody>
 					{% for status in Statuses %}
 						<tr>
+							<td><a href="{{ path('tech_corp_front_user_timeline', { userId : status.user.id }) }}">{{ status.user.username }}</a></td>
 							<td>{{ status.content }}</td>
 							<td>{{ status.deleted ? "supprimé" : "visible" }}</td>
 							<td>

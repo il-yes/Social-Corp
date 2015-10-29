@@ -3,6 +3,7 @@
 namespace TechCorp\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use TechCorp\FrontBundle\Entity\User;
 
 /**
  * Status
@@ -49,6 +50,12 @@ class Status
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="statuses")
+     * @ORM\joincolumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
 
 
     /**
@@ -167,4 +174,28 @@ class Status
         $this->updatedAt = new \DateTime();
     }
 
+
+    /**
+     * Set user
+     *
+     * @param \TechCorp\FrontBundle\Entity\user $user
+     *
+     * @return Status
+     */
+    public function setUser(\TechCorp\FrontBundle\Entity\user $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \TechCorp\FrontBundle\Entity\user
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }
