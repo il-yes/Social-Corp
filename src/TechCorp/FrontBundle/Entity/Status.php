@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Status
  *
- * @ORM\Table(name="status")
+ * @ORM\Table(name="tech_corp_status")
  * @ORM\Entity(repositoryClass="TechCorp\FrontBundle\Repository\StatusRepository")
  * @ORM\HasLifecycleCallbacks()
  */

@@ -1,0 +1,31 @@
+{% extends 'TechCorpFrontBundle::layout.html.twig' %}
+
+{% block content %}
+		<div class="container">
+			<h1>Timeline</h1>
+
+			<table class="statuses_list">
+				<thead>
+					<tr>
+						<th>Content</th>
+						<th>deleted</th>
+						<th>Created at</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for status in Statuses %}
+						<tr>
+							<td>{{ status.content }}</td>
+							<td>{{ status.deleted ? "supprimé" : "visible" }}</td>
+							<td>
+								{% if status.createdAt %}
+									{{ status.createdAt|date('Y-m-d H:i:s') }}
+								{% endif %}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+		</div>
+{% endblock content %}
