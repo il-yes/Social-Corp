@@ -35,6 +35,7 @@ class LoadStatusData extends AbstractFixture implements OrderedFixtureInterface
 		
 			// On la persiste
 	  		$manager->persist($status);
+	  		$this->addReference('status'.$i, $status);
 		}
 
 		// On déclenche l'enregistrement de touts les status

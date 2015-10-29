@@ -15,7 +15,7 @@
 				Cet utilisateur n'a rien publié pour le moment.
 			</p>
 			{% endif %}
-
+			
 			<h2>liste des personnes ajoutées</h2>
 			{% for currFriend in user.friends %}
 				<p><a href="{{ path('tech_corp_front_user_timeline', { userId : currFriend.id }) }}">{{ currFriend.username }}</a></p>

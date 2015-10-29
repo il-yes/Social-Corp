@@ -4,6 +4,7 @@ namespace TechCorp\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use TechCorp\FrontBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Status
@@ -178,7 +179,7 @@ class Status
 
 
     /**
-     * @ORM\Prepersist
+     * @ORM\PrePersist
      */
     public function preUpdateEvent()
     {
