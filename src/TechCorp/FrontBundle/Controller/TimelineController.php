@@ -32,4 +32,19 @@ class TimelineController extends Controller
                                                                                            'user' => $user));
     }
 
+
+    public function friendsTimelineAction($userId)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('TechCorpFrontBundle:User')->findOneById($userId);
+
+        if(!$user){
+            $this->createNotfoundException("l'utilisateur n'a pas été trouvé.");
+        }
+        $Statuses = $em->getRepository('TechCorpFrontBundle:Status')->getFriendsTimeline($user)->getResult();
+
+        return $this->render('TechCorpFrontBundle:Timeline:friends_timeline.html.twig', array('Statuses' => $Statuses,
+                                                                                              'user' => $user));
+    }
+
 }

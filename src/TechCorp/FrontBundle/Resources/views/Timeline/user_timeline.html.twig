@@ -5,15 +5,15 @@
 			<h1>Timeline de {{ user.username }}</h1>
 
 			{% if Statuses != null %}
-			<div class="container">
-				{% for status in Statuses %}
-					{% include 'TechCorpFrontBundle:_components:status.html.twig' with {'status' :status} %}
-				{% endfor %}
-			</div>
+				<div class="container">
+					{% for status in Statuses %}
+						{% include 'TechCorpFrontBundle:_components:status.html.twig' with {'status' :status} %}
+					{% endfor %}
+				</div>
 			{% else %}
-			<p>
-				Cet utilisateur n'a rien publié pour le moment.
-			</p>
+				<p>
+					Cet utilisateur n'a rien publié pour le moment.
+				</p>
 			{% endif %}
 			
 			<h2>liste des personnes ajoutées</h2>
