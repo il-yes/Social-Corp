@@ -10,7 +10,7 @@ class TimelineController extends Controller
     public function timelineAction()
     {
     	$em = $this->getDoctrine()->getManager();
-    	$Statuses = $em->getRepository('TechCorpFrontBundle:Status')->findAll();
+    	$Statuses = $em->getRepository('TechCorpFrontBundle:Status')->getStatusesAndUsers()->getResult();
 
         return $this->render('TechCorpFrontBundle:Timeline:timeline.html.twig', array('Statuses' => $Statuses));
     }
