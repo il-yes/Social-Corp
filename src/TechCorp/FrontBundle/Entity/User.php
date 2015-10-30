@@ -4,6 +4,8 @@ namespace TechCorp\FrontBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use TechCorp\FrontBundle\Entity\Status;
+use FOS\UserBundle\Model\User as BaseUser;
+
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -13,11 +15,12 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="tech_corp_user")
  * @ORM\Entity(repositoryClass="TechCorp\FrontBundle\Repository\UserRepository")
  */
-class User 
+class User extends BaseUser
 {
 
     public function __construct()
     {
+        parent::__construct();
         $this->statuses = new ArrayCollection();
         $this->friends = new ArrayCollection();
         $this->friendsWithMe = new ArrayCollection();
@@ -35,14 +38,7 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=255)
-     */
-    private $username;
+    protected $id;
 
     /**
      * @ORM\OneToMany(targetEntity="Status", mappedBy="user")
@@ -84,33 +80,6 @@ class User
     {
         return $this->id;
     }
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     *
-     * @return User
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * Get username
-     *
-     * @return string
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-
-
 
     /**
      * Add status
