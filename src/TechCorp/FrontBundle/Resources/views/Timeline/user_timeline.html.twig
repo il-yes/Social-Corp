@@ -4,6 +4,19 @@
 		<div class="container">
 			<h1>Timeline de {{ user.username }}</h1>
 
+			{% if is_granted('IS_AUTHENTICATED_REMEMBERED') and app.user == user %}
+				{{ form_start(form) }}
+					{{ form_errors(form) }}
+					<div>
+						{{ form_label(form.content) }}
+						{{ form_errors(form.content) }}
+						{{ form_widget(form.content) }}
+					</div>
+
+					<input type="submit"/>
+				{{ form_end(form) }}
+			{% endif %}
+
 			{% if Statuses != null %}
 				<div class="container">
 					{% for status in Statuses %}

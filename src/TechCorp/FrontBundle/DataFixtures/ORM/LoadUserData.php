@@ -37,18 +37,33 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
 
 		for ($i=0; $i<self::MAX_NB_USERS; ++$i)
 		{
-			$user = new User();
+			// create a new user
+			$user = $userManager->createUser();
 			$user->setUsername($faker->username);
 			$user->setEmail($faker->email);
-			$user->setPlainPassword($faker->password);
+			$user->setPlainPassword('123456');
 			$user->setEnabled(true);
 
 	  		$manager->persist($user);
 
+
+
 		}
+
+		$user = $userManager->createUser();
+		$user->setUsername('user');
+		$user->setEmail($faker->email);
+		$user->setPlainPassword('password');
+		$user->setEnabled(true);
+
+
+		$manager->persist($user);
 
 		$manager->flush();
 
 	}
+
+
+
 
 }
