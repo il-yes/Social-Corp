@@ -20,7 +20,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "doctrine/doctrine-fixtures-bundle": "~2.2",
         "fzaninotto/faker": "~1.4",
-        "friendsofsymfony/user-bundle": "~2.0dev"
+        "friendsofsymfony/user-bundle": "~2.0dev",
+        "friendsofsymfony/jsrouting-bundle": "^1.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
