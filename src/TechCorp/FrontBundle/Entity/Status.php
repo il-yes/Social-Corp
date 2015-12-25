@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use TechCorp\FrontBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Status
  *
@@ -34,6 +36,8 @@ class Status
      * @var string
      *
      * @ORM\Column(name="content", type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length(max=255)
      */
     private $content;
 
@@ -68,6 +72,13 @@ class Status
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="status")
      */
     private $comments;
+
+    /**
+     * @ORM\OneToOne(targetEntity="TechCorp\FrontBundle\Entity\Image", cascade={"persist"})
+     * @Assert\Valid()
+     */
+    private $image;
+
 
 
     /**
@@ -243,5 +254,29 @@ class Status
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \TechCorp\FrontBundle\Entity\Image $image
+     *
+     * @return Status
+     */
+    public function setImage(\TechCorp\FrontBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \TechCorp\FrontBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

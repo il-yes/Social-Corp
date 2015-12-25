@@ -1,21 +1,39 @@
 <div class="row status-container">
 	<div class="col-md-12">
-		<p>Par <a href="{{ path('tech_corp_front_user_timeline', { userId : status.user.id }) }}">{{ status.user.username }}</a></p>
-		<p>{{ status.content }}</p>
-		<p>{{ status.createdAt|date('d-m-Y à H:i:s') }}</p>
+		<p class="author">Par <a href="{{ path('tech_corp_front_user_timeline', { userId : status.user.id }) }}">{{ status.user.username }}</a></p>
+		<div class="col-sm-9">
+			<p>{{ status.content }}</p>
+			<p class="date">{{ status.createdAt|date('d-m-Y à H:i:s') }}</p>
+		</div>
+		<div class="col-sm-3">
+			{% if status.image is not null %}
+		        <img src="{{ asset(status.image.webPath) }}" alt="{{ status.image.alt }}" class="img-responsive thumbnail">
+		    {% endif %}
+		</div>
+
 	</div>
 </div> 
-<div class="col-md-12">
+<div class="col-md-12 comment-container">
 	{% for comment in status.comments %}
 		<div class="row">
 			<div class="col-sm-10 col-sm-offset-1">
-				<p>Commentaire de <a href="{{ path('tech_corp_front_user_timeline', { userId : comment.user.id }) }}">{{ comment.user.username }}</a></p>
+				<p class="author">Commentaire de <a href="{{ path('tech_corp_front_user_timeline', { userId : comment.user.id }) }}">{{ comment.user.username }}</a></p>
 				
 				<p>{{ comment.content }}</p>
 				
-				<p>{{ comment.createdAt|date('Y-m-d H:i:s') }}</p>
+				<p class="date">{{ comment.createdAt|date('Y-m-d H:i:s') }}</p>
 			</div>
 		</div>
 	{% endfor %}
-<hr>
+
+
+	{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+	<div class="row">
+		<div class="col-md-12">
+			<p class="comment-title">Ajouter un commentaire :</p>
+			<textarea width="100%"></textarea>
+			<input type="submit">
+		</div>
+	{% endif %}
+	</div>
 </div>

@@ -1,26 +1,50 @@
 {% extends 'TechCorpFrontBundle::layout.html.twig' %}
 
+{% block stylesheets %}
+	{{ parent() }}
+	<link href='{{ asset("css/style.css") }}' rel="stylesheet"/>
+{% endblock stylesheets %}
+
+
+
 {% block content %}
 		<div class="container">
 			<h1>Timeline de {{ user.username }}</h1>
 
 			{% if is_granted('IS_AUTHENTICATED_REMEMBERED') and app.user == user %}
-				{{ form_start(form) }}
-					{{ form_errors(form) }}
-					<div>
-						{{ form_label(form.content) }}
-						{{ form_errors(form.content) }}
-						{{ form_widget(form.content) }}
-					</div>
+				{% if not app.user.hasFriend(user) %}
+					<button class="btn btn-primary add-friend" data-user-id="{{ user.id }}">Ajouter à la liste d'amis</button>
+				{% else %}
+					<button class="btn btn-primary remove-friend" data-user-id="{{ user.id }}">Supprimer de la liste d'amis</button>
+				{% endif %}
 
-					<input type="submit"/>
-				{{ form_end(form) }}
+
+				<div class="col-sm-8 col-sm-offset-2">
+					{{ form_start(form) }}
+						{{ form_errors(form) }}
+						<div>
+							{{ form_label(form.content) }}
+							{{ form_errors(form.content) }}
+							{{ form_widget(form.content) }}
+						</div>
+						{{ form_rest(form) }}
+
+						<input type="submit"/>
+					{{ form_end(form) }}
+				</div>
 			{% endif %}
+
+			
+			<div class="clearfix"></div>
 
 			{% if Statuses != null %}
 				<div class="container">
 					{% for status in Statuses %}
 						{% include 'TechCorpFrontBundle:_components:status.html.twig' with {'status' :status} %}
+
+						{% if not loop.last %}
+							<hr class="status-separator"/>
+						{% endif %}
 					{% endfor %}
 				</div>
 			{% else %}
@@ -38,3 +62,8 @@
 
 		</div>
 {% endblock content %}
+
+{% block javascripts_body %}
+	{{ parent() }}
+	<script src='{{ asset("js/manage-friends.js") }}'></script>
+{% endblock javascripts_body %}

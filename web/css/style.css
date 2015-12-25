@@ -1,0 +1,19 @@
+.status-container{
+	
+}
+.comment-container{
+	background: lightblue;
+}
+.status-container .author
+.comment-container .author
+.status-container .comment-title{
+	font-weight: bold;	
+}
+.status-container .date
+.comment-container .date{
+	font-style: italic;
+}
+.status-separator{
+	border-color: lightblue;
+	width: 50%;
+}
