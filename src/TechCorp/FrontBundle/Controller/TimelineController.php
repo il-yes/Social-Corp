@@ -77,4 +77,13 @@ class TimelineController extends Controller
                                                                                               'user' => $user));
     }
 
+
+    public function usersListAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository('TechCorpFrontBundle:User')->findAll();
+
+        return $this->render('TechCorpFrontBundle:Timeline:users_list.html.twig', array('users' => $users));
+    }
+
 }
